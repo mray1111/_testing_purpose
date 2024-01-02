@@ -17,6 +17,15 @@ export const checkout = async (req, res) => {
     //make sure you are connected with internet if order create fails
     const order = await instance.orders.create(options);
 
+    if (!order) {
+      // Handle the case where the order creation failed
+      console.error("Order creation failed:", order);
+      return res.status(500).json({
+        success: false,
+        error: "Failed to create order",
+      });
+    }
+
     await Payment.create({
       razorpay_order_id: order.id,
       razorpay_payment_id: null, // This will be updated during payment verification
@@ -44,6 +53,13 @@ export const checkout = async (req, res) => {
 export const paymentVerification = async (req, res) => {
 
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+  if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+    return res.status(400).json({
+      success: false,
+      error: "Missing required parameters",
+    });
+  }
+
   try {
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;

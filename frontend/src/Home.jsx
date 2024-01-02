@@ -6,8 +6,9 @@ import axios from "axios";
 const Home = () => {
 
     const checkoutHandler = async (amount, name, email) => {
-
-        const { data: { key } } = await axios.get("http://localhost:4000/api/getkey");
+        
+        const key=process.env.REACT_APP_RAZORPAY_API_KEY;
+        console.log("key is",key)
         const { data: { order } } = await axios.post("http://localhost:4000/api/checkout", {
             amount,
             name,

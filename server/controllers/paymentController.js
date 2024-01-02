@@ -7,6 +7,7 @@ import Payment from "../models/paymentModel.js";
 export const checkout = async (req, res) => {
   // Extract customer details from the request body
   const { name, email, amount } = req.body;
+  //console.log(req.body)
 
   // Validate name, email, and amount as needed
 
@@ -16,7 +17,10 @@ export const checkout = async (req, res) => {
   };
 
   try {
+
+    //make sure you are connected with internet if order create fails
     const order = await instance.orders.create(options);
+    // console.log("order id ",order)
 
     // Save order details to the database, including name and email
     await Payment.create({
@@ -26,6 +30,7 @@ export const checkout = async (req, res) => {
       name,
       email,
     });
+    
 
     // Handle successful creation of the order
     res.status(200).json({
@@ -48,8 +53,10 @@ export const checkout = async (req, res) => {
 export const paymentVerification = async (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
-  console.log(razorpay_order_id,razorpay_payment_id,razorpay_signature)
+  // console.log(razorpay_order_id,razorpay_payment_id,razorpay_signature)
 
+  // const response = await instance.orders.fetchPayments(razorpay_order_id)
+  // console.log("responsee is ",response)
 
   try {
 
@@ -75,10 +82,13 @@ export const paymentVerification = async (req, res) => {
       );
       // return res.status(200).json({
       //   success: true,
-      //   error: "True",
+      //   message: "payment verified successfully ",
       // });
 
-      return res.redirect(`http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`);
+      const cust_email = updatedPayment.email;
+      const cust_name = updatedPayment.name;
+      return res.redirect(`http://localhost:3000/payment_redirect?reference=${razorpay_payment_id}&email=${cust_email}&name=${cust_name}`);
+      // return res.redirect(`http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`);
     } else {
       return res.status(400).json({
         success: false,

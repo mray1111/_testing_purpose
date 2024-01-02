@@ -6,8 +6,9 @@ function App() {
   return (
     <Router>
       <Routes>
+
         <Route path="/" element={<Home />} />
-        <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+        <Route path="/payment_redirect" element={<PaymentSuccess />} />
       </Routes>
     </Router>
   );

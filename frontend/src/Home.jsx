@@ -31,6 +31,12 @@ const Home = () => {
             },
             theme: {
                 "color": "#121212"
+            },
+            method: {
+                netbanking: "1",
+                card: "1",
+                upi: "1",
+                wallet: "1"
             }
         };
 
@@ -46,7 +52,6 @@ const Home = () => {
                 
                 <Card amount={20} img={"http://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"} name="user2" email="user2@admin.com" checkoutHandler={checkoutHandler} />
 
-                <Card amount={30} img={"http://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"} name="user3" email="user3@admin.com" checkoutHandler={checkoutHandler} />
             </Stack>
         </Box>
     );

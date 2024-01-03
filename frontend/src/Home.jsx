@@ -19,7 +19,7 @@ const Home = () => {
             amount: order.amount,
             currency: "INR",
             description: "TEDx IIT Guwahati",
-            image: "pleaseenterimage",
+            image: "please_enter_imageURL_here_to_show_in_URL",
             order_id: order.id,
             callback_url: "http://localhost:4000/api/paymentVerification",
             prefill: {
@@ -27,7 +27,7 @@ const Home = () => {
                 email: email,
             },
             notes: {
-                "address": "Razorpay Corporate Office"
+                "address": "IIT Guwahati TEDx"
             },
             theme: {
                 "color": "#121212"
@@ -42,9 +42,11 @@ const Home = () => {
         <Box>
             <Stack h={"100vh"} alignItems="center" justifyContent="center" direction={["column", "row"]}>
 
-                <Card amount={10} img={"https://cdn.shopify.com/s/files/1/1684/4603/products/MacBookPro13_Mid2012_NonRetina_Silver.png"} name="manish001" email="user1@admin.com" checkoutHandler={checkoutHandler} />
+                <Card amount={10} img={"https://cdn.shopify.com/s/files/1/1684/4603/products/MacBookPro13_Mid2012_NonRetina_Silver.png"} name="user1" email="user1@admin.com" checkoutHandler={checkoutHandler} />
                 
-                <Card amount={20} img={"http://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"} name="manish002" email="user2@admin.com" checkoutHandler={checkoutHandler} />
+                <Card amount={20} img={"http://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"} name="user2" email="user2@admin.com" checkoutHandler={checkoutHandler} />
+
+                <Card amount={30} img={"http://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"} name="user3" email="user3@admin.com" checkoutHandler={checkoutHandler} />
             </Stack>
         </Box>
     );
